@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 532033770ea1fcd42aa53e0ef90a3836
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - roomCreateNameText: {instanceID: 0}
+  - _roomPanel: {instanceID: 0}
+  - _NNCanvas: {instanceID: 0}
+  - _NNInputField: {instanceID: 0}
+  - _popupCanvas: {instanceID: 0}
+  - nextButton: {instanceID: 0}
+  - prevButton: {instanceID: 0}
+  - clip: {fileID: 8300000, guid: 1e00058e369dc2e42820c8d793075cc9, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
