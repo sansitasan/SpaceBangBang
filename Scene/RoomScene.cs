@@ -64,7 +64,7 @@ namespace SpaceBangBang
 				SoundButton();
                 var notReadyPlayers = PhotonNetwork.PlayerListOthers.ToList().Find(x => (bool)x.CustomProperties["isReady"] == false);
 
-                if (true/*notReadyPlayers == null && PhotonNetwork.CurrentRoom.PlayerCount >= 2*/)
+                if (notReadyPlayers == null && PhotonNetwork.CurrentRoom.PlayerCount >= 2)
                 {
                     cancel.Dispose();
                     PhotonNetwork.CurrentRoom.IsVisible = false;
@@ -76,10 +76,10 @@ namespace SpaceBangBang
                     PhotonNetwork.CurrentRoom.SetCustomProperties(CP);
                     NetworkManager.Instance.photonView.RPC("StartCharacterSelectRPC", RpcTarget.All);
                 }
-                //else if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
-                    //_popupCanvas.SetMessage("인원이 부족합니다");
-                //else if(notReadyPlayers != null)
-                    //_popupCanvas.SetMessage("준비되지 않은 인원이 있습니다");
+                else if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+                    _popupCanvas.SetMessage("인원이 부족합니다");
+                else if(notReadyPlayers != null)
+                    _popupCanvas.SetMessage("준비되지 않은 인원이 있습니다");
             }
             else
             {
