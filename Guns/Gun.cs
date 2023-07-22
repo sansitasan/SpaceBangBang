@@ -54,7 +54,7 @@ namespace SpaceBangBang
         protected virtual void Init()
         {
         }
-
+#if UNITY_EDITOR
         protected virtual void Update() // 테스트용 총 발사 함수, 회전 함수
         {
             if (Input.GetKeyDown(KeyCode.A) && photonView.IsMine && CanShot)
@@ -66,7 +66,7 @@ namespace SpaceBangBang
                 SparyShot();
             }
         }
-
+#endif
         public virtual bool Shot(bool hasEffect = true) // 총 발사
         {
             if (CanShot)

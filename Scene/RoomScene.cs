@@ -62,6 +62,7 @@ namespace SpaceBangBang
             if (isMaster)
             {
 				SoundButton();
+                //tlqkf
                 var notReadyPlayers = PhotonNetwork.PlayerListOthers.ToList().Find(x => (bool)x.CustomProperties["isReady"] == false);
 
                 if (true/*notReadyPlayers == null && PhotonNetwork.CurrentRoom.PlayerCount >= 2*/)

@@ -20,6 +20,8 @@ public class CardHandlUI : MonoBehaviour
     Transform myCardRight;
     [SerializeField]
     Transform cardSpawnPoint;
+    //시퀀스
+    private Sequence seq;
 
     private Transform originCard;
 
@@ -51,22 +53,22 @@ public class CardHandlUI : MonoBehaviour
     {
         if(hand.Count == 0)
             return;
-        hand[0].transform.DOKill(hand[0].transform);
+        seq.Kill();
         hand[0].transform.DOMove(hand[0].transform.position + Vector3.down*300f, 0.1f);
         hand[index].onClick.RemoveAllListeners();
-        hand[index].animator.SetBool("Hide", true);
+        //hand[index].animator.SetBool("Hide", true);
         hand[0].transform.localScale = originCard.localScale;
         //애니메이션이 끝나면 CardObjectPool에 반환
-        float time = hand[index].animator.GetCurrentAnimatorStateInfo(0).length;
-        StartCoroutine(ReturnToPool(hand[index], time));
+        //float time = hand[index].animator.GetCurrentAnimatorStateInfo(0).length;
+        ReturnToPool(hand[index]);
         hand.RemoveAt(index);
         CardAlignment();
     }
     
-    IEnumerator ReturnToPool(Button button, float time)
+    void ReturnToPool(Button button)
     {
-        yield return new WaitForSeconds(time);
-        button.animator.Rebind();
+        // yield return new WaitForSeconds(time);
+        // button.animator.Rebind();
         CardObjectPool.ReturnObject(button);
     }
 
@@ -88,9 +90,17 @@ public class CardHandlUI : MonoBehaviour
 
         if (hand.Count != 0)
         {
-            DOTween.Sequence().Append(hand[0].transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), 0.5f))
+            if (seq != null)
+            {
+                seq.Kill();
+            }
+
+            seq = DOTween.Sequence()
+                .Append(hand[0].transform.DORotateQuaternion(Quaternion.Euler(0, 0, 0), 0.5f))
                 .Join(hand[0].transform.DOMove(cardPRSs[0].pos + new Vector3(-1, 2, 0) * 30f, 0.5f))
                 .Append(hand[0].transform.DOShakePosition(0.5f, 10f, 10, 90f, false, true));
+
+            seq.Play();
         }
     }
 

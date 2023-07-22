@@ -80,13 +80,12 @@ namespace SpaceBangBang
         {
             for (int i = 0; i < cnt; ++i)
             {
+                _curHandSize++;
+                if (_curHandSize > _handSize && !bCard && photonView.IsMine)
+                    photonView.RPC("RemoveCardRPC", RpcTarget.All, 0);
                 _p.cAudio.PlaySound(_p.clips[(int)ClipType.CardDraw], Sound.Effect);
                 _handCardList.Add(CardsManager.Instance.excute(cardnum[i]));
                 _cardHandlUI?.AddCardToHand(_handCardList[_handCardList.Count - 1]);
-                _curHandSize++;
-
-                if (_curHandSize > _handSize && !bCard && photonView.IsMine)
-                    photonView.RPC("RemoveCardRPC", RpcTarget.All, 0);
             }
         }
 

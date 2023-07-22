@@ -91,6 +91,7 @@ namespace SpaceBangBang
             
             DOTween.Sequence()
                 .Append(t.DOMoveY(-110, 5).SetEase(Ease.InOutQuart).SetRelative())
+                .AppendCallback(() => Debug.Log(followCM.transform.position))
                 .AppendInterval(1f)
                 .Append(t.DOMoveX(player.transform.position.x, 0.7f).SetEase(Ease.InOutQuart))
                 .Join(t.DOMoveY(player.transform.position.y, 0.7f).SetEase(Ease.InOutQuart))
@@ -145,14 +146,16 @@ namespace SpaceBangBang
             NetworkManager.Instance.EndBattle -= EndBattle;
             NetworkManager.Instance.LeftPlayer -= ChangeFollowingCam;
             followCM.Follow = null;
-            float x = t.position.x;
-            float y = t.position.y;
+            float x = followCM.transform.position.x;
+            
+            float y = followCM.transform.position.y;
             DOTween.Sequence()
             .AppendCallback(() => followCM.LookAt = null)
             .Append(DOTween.To(() => followCM.m_Lens.OrthographicSize, x => followCM.m_Lens.OrthographicSize = x, 75, 3).SetEase(Ease.InOutQuart))
-            .Join(t.DOMoveY(10 - y, 3).SetEase(Ease.InOutQuart).SetRelative())
-            .Join(t.DOMoveX(123 - x, 3).SetEase(Ease.InOutQuart).SetRelative())
+            .Join(followCM.transform.DOMoveY(10 - y, 3).SetEase(Ease.InOutQuart).SetRelative())
+            .Join(followCM.transform.DOMoveX(123 - x, 3).SetEase(Ease.InOutQuart).SetRelative())
             .AppendInterval(2f)
+            .AppendCallback(() => Debug.Log(followCM.transform.position))
             .AppendCallback(() =>
             {
                 SetUI(winner);

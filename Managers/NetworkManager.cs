@@ -355,6 +355,7 @@ namespace SpaceBangBang
         [PunRPC]
         private void StartGameRPC()
         {
+            GameManager.Instance.timerText.gameObject.SetActive(false);
             roomScene.ChangeScene();
             AsyncOperation ao = SceneManager.LoadSceneAsync("BattleScene");
             if (ao != null)

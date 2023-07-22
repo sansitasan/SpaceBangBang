@@ -29,12 +29,6 @@ namespace SpaceBangBang
             _audioSource = gameObject.AddComponent<AudioSource>(); // 임시 오디오 소스
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
         public void Shot() // 총 발사
         {
             photonView.RPC("ShotEffectRPC", RpcTarget.All);
