@@ -114,7 +114,7 @@ RoomScene - When two or more people are in the room and ready, select a characte
 ------------------------------------------
 Soundlist
 
-BgmPlayer - BgmPlay all scene
+BgmPlayer - BgmPlay all scene  
 
 CAudio - base of all Sound
 
